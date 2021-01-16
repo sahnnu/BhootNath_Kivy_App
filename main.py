@@ -114,26 +114,54 @@ class SigninWindow(BoxLayout):
 class BhootnathApp(App):
     def Displaysum(self, *args):
         try:
-            if len(self.inputField.text) <= 3:
 
-                inputNumber = int(self.inputField.text)
-                global digit_num3, digit_num1
-                digit_num3 = inputNumber
-                if inputNumber == 000:
-                    self.lotteryResult.text = "0"
-                else:
-                    rev = 0
-                    while inputNumber > 0:
-                        dig = inputNumber % 10
-                        rev = rev + dig
-                        inputNumber = inputNumber // 10
-                        singleNumber = rev % 10
-                        digit_num1 = singleNumber
-                        self.lotteryResult.text = str(singleNumber)
+            List_input = [128, 290, 100, 579, 335, 137, 380, 678, 344, 146, 470, 119, 399, 236, 489, 155, 588, 245, 560,
+                          777, 227, 129, 246, 200, 589, 336, 138, 345, 679, 499, 147, 390, 110, 666, 136, 480, 228, 688,
+                          237, 570, 444, 255, 120, 247, 300, 670, 355, 139, 256, 689, 445, 148, 346, 166, 599, 157, 490,
+                          229, 779, 238, 580, 111, 337, 130, 248, 400, 680, 338, 149, 257, 789, 446, 158, 347, 112, 455,
+                          167, 356, 220, 699, 239, 590, 888, 266, 140, 258, 500, 690, 339, 159, \
+                          267, 780, 366, 168, 348, 113, 447, 230, 357, 122, 799, 249, 456, 555, 177, 123, 259, 600, 457,
+                          448, 150, 268, 790, \
+                          466, 169, 349, 114, 556, 178, 358, 277, 880, 240, 367, 222, 330, 124, 278, 700, 467, 223, 160,
+                          340, 890, 377, 179, \
+                          359, 115, 449, 250, 368, 133, 557, 269, 458, 999, 188, 125, 279, 800, 468, 288, 134, 350, 567,
+                          440, 170, 369, 116, \
+                          477, 189, 378, 224, 558, 260, 459, 666, 233, 126, 289, 900, 478, 225, 135, 360, 568, 388, 180,
+                          379, 117, 559, 270, 450, 144, 577, 234, 469, 333, 199, 127, 235, 550, 569, \
+                          299, 136, 370, 578, 334, 145, 389, 118, 488, 190, 460, 226, 668, 280, 479, 0, 244, 669, 778,
+                          788, 770, \
+                          889, 899, 566, 990, 667, 677]
+
+            inputNumber = int(self.inputField.text)
+
+            flag = False
+            for i in List_input:
+
+                if inputNumber == i:
+                    flag = True
+                    break
+                print("number is",inputNumber)
+
+            global digit_num3, digit_num1
+            digit_num3 = inputNumber
+            rev = 0
+            if flag :
+
+                while inputNumber > 0:
+
+                    dig = inputNumber % 10
+                    rev = rev + dig
+                    inputNumber = inputNumber // 10
+                    singleNumber = rev % 10
+                    digit_num1 = singleNumber
+                    self.lotteryResult.text = str(singleNumber)
             else:
-                self.lotteryResult.text = "Enter three digit Integer"
+
+                self.lotteryResult.text = "Please enter a valid lottery number"
+
+
         except:
-            self.lotteryResult.text = "Provide Integer Input"
+            self.lotteryResult.text = "Please enter a valid number"
 
     def CurrentSlot(self, *args):
         currenttime = datetime.datetime.now().hour
