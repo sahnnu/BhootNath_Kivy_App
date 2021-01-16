@@ -1,0 +1,146 @@
+<FlatButton@ButtonBehavior+Label>:
+    font_sixe: 10
+<SigninWindow>:
+    id: main_win
+    orientation: "vertical"
+    spacing: 2
+
+    space_x: self.size[0]/5
+    canvas.before:
+        Color:
+            rgba: (255, 255, 255, 255)
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    BoxLayout:
+        size_hint_y:1.0
+
+        size:self.size
+        canvas.before:
+            Color:
+                rgba: (0, 0, 1, 1)
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        Label:
+            text: "*** Bhootnath Result App - Only for Admin ***"
+            bold: True
+            size_hint_x: 1.0
+            FlatButton:
+                text: "x"
+                size_hint_x: .1
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 300,300
+        spacing: 30
+        size_hint_y: None
+        height: 400
+        BoxLayout:
+            orientation: "vertical"
+            spacing: 35
+            size_hint_y: 20
+            size_hint_x: 1.0
+            height: 30
+            TextInput:
+                id: username_field
+                hint_text: "Username"
+                multiline: False
+                pos : (1000,200)
+                focus: True
+                size:self.size
+                on_text_validate: pwd_field.focus= True
+                size_hint_y: None
+
+
+            PasswordtextInput:
+                id: pwd_field
+                hint_text: "Password"
+                multiline: False
+                size:self.size
+                password: True #for * pattern password
+
+                size_hint_y: None
+                on_text_validate:self.SigninFunc()
+
+    Label:
+        id: sp
+        size_hint_y: None
+        height: 20
+        canvas:
+            Color:
+                rgba: (0, 1, 1, 1)
+        SigninButton:
+            text: "Sign In"
+            size_hint_y: None
+            height: 40
+            background_color: (.06,.06,.06,1)
+            background_normal: ''
+            pos : (500,200)
+            on_release: self.gotoscreen2()
+            canvas:
+                Color:
+                    rgba: (0, 1, 1, 1)
+        Label:
+            id: sp2
+
+<FIrstLabel>:
+    text:"*** Bhootnath Result Publish Page ***"
+    pos_hint:{'center_x': 0.5, 'center_y':0.90}
+    background_color:0,1,0,1
+    width:130
+
+
+<SlotButton>:
+    text:'Select the slot...'
+    size_hint:None, None
+    height:45
+    width:130
+    pos_hint:{'center_x': 0.15, 'center_y': 0.73}
+    background_color:0,1,0,1
+
+
+<Date>:
+    size_hint:None, None
+    height:100
+    width:300
+    pos_hint:{'center_x': 0.5, 'center_y': 0.8}
+    background_color:0,0,0,0
+    color:1,1,1,1
+
+<AnswerInput>:
+    orientation: "vertical"
+    BoxLayout:
+        height: "40dp"
+        size_hint_y: None
+        size_hint_X: 20
+        Submit:
+            text: "Submit"
+            size_hint_x: 10
+            on_release :self.last_submit()
+
+
+
+<textinp>:
+    title: 'InputDialog'
+    auto_dismiss: False
+    id: input
+    hint_text:'Enter the Number to get Sum '
+    pos_hint: {'center_x': 0.50, 'center_y': 0.73}
+    size_hint: 0.28, 0.10
+    multiline:False
+
+
+<LotteryNumber>:
+    size_hint:None, None
+    height:45
+    width:160
+    pos_hint:{'center_x': 0.5, 'center_y': 0.50}
+    background_color:0,1,0,1
+    color:0,1,0,1
+    text:"Press for Single Digit"
+
+
+
+
+
+
