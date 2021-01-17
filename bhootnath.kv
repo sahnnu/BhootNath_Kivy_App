@@ -1,18 +1,17 @@
-<FlatButton@ButtonBehavior+Label>:
-    font_sixe: 10
+
 <SigninWindow>:
     id: main_win
     orientation: "vertical"
     spacing: 2
 
-    space_x: self.size[0]/5
+    space_x: self.size[0]/9
     canvas.before:
         Color:
             rgba: (0, 0, 1, 1)
         Rectangle:
             size: self.size
             pos: self.pos
-   
+
     BoxLayout:
         orientation: 'vertical'
         padding: 300,300
