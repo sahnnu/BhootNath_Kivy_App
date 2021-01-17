@@ -8,27 +8,11 @@
     space_x: self.size[0]/5
     canvas.before:
         Color:
-            rgba: (255, 255, 255, 255)
+            rgba: (0, 0, 1, 1)
         Rectangle:
             size: self.size
             pos: self.pos
-    BoxLayout:
-        size_hint_y:1.0
-
-        size:self.size
-        canvas.before:
-            Color:
-                rgba: (0, 0, 1, 1)
-            Rectangle:
-                size: self.size
-                pos: self.pos
-        Label:
-            text: "*** Bhootnath Result App - Only for Admin ***"
-            bold: True
-            size_hint_x: 1.0
-            FlatButton:
-                text: "x"
-                size_hint_x: .1
+   
     BoxLayout:
         orientation: 'vertical'
         padding: 300,300
