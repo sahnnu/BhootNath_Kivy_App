@@ -128,11 +128,12 @@ class BhootnathApp(App):
                           440, 170, 369, 116, \
                           477, 189, 378, 224, 558, 260, 459, 666, 233, 126, 289, 900, 478, 225, 135, 360, 568, 388, 180,
                           379, 117, 559, 270, 450, 144, 577, 234, 469, 333, 199, 127, 235, 550, 569, \
-                          299, 136, 370, 578, 334, 145, 389, 118, 488, 190, 460, 226, 668, 280, 479, 0, 244, 669, 778,
+                          299, 136, 370, 578, 334, 145, 389, 118, 488, 190, 460, 226, 668, 280, 479, 000, 244, 669, 778,
                           788, 770, \
                           889, 899, 566, 990, 667, 677]
 
-            inputNumber = int(self.inputField.text)
+            inputNumber = int(str(self.inputField.text))
+
 
             flag = False
             for i in List_input:
@@ -140,21 +141,24 @@ class BhootnathApp(App):
                 if inputNumber == i:
                     flag = True
                     break
-                print("number is",inputNumber)
+
 
             global digit_num3, digit_num1
             digit_num3 = inputNumber
             rev = 0
             if flag :
+                if inputNumber == 0:
+                    self.lotteryResult.text = str(inputNumber)
+                else:
+                    while inputNumber > 0:
 
-                while inputNumber > 0:
+                        dig = inputNumber % 10
+                        rev = rev + dig
+                        inputNumber = inputNumber // 10
+                        singleNumber = rev % 10
+                        digit_num1 = singleNumber
+                        self.lotteryResult.text = str(singleNumber)
 
-                    dig = inputNumber % 10
-                    rev = rev + dig
-                    inputNumber = inputNumber // 10
-                    singleNumber = rev % 10
-                    digit_num1 = singleNumber
-                    self.lotteryResult.text = str(singleNumber)
             else:
 
                 self.lotteryResult.text = "Please enter a valid lottery number"
@@ -197,21 +201,21 @@ class BhootnathApp(App):
         upperbound = 11
         i =0
         #currenttime = 1 Edit this for testing in different hours of time
-        print(currenttime)
+
         while i < len(slotlist):
 
             if lowerbound <= currenttime <= upperbound:
                 self.mainbutton.text = slotdict[i]
                 global slot_num
                 slot_num = i
-                print(slot_num)
+
                 break
             elif closetime < currenttime or currenttime < opentime:
                 self.mainbutton.text = slotdict[slotover]
                 break
 
             #if i < len(slotlist): #To avoid out of range
-            print(i)
+
             lowerbound = slotlist[i]  # 11
             upperbound = slotlist[i + 1]  # 12
             i += 1

@@ -1,34 +1,51 @@
-
+<FlatButton@ButtonBehavior+Label>:
+    font_sixe: 10
 <SigninWindow>:
     id: main_win
     orientation: "vertical"
     spacing: 2
 
-    space_x: self.size[0]/9
+    space_x: self.size[0]/5
     canvas.before:
         Color:
-            rgba: (0, 0, 1, 1)
+            rgba: (255, 255, 255, 255)
         Rectangle:
             size: self.size
             pos: self.pos
+    BoxLayout:
+        size_hint_y:1.0
 
+        size:self.size
+        canvas.before:
+            Color:
+                rgba: (0, 0, 1, 1)
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        Label:
+            text: "*** Bhootnath Result App - Only for Admin ***"
+            bold: True
+            size_hint_x: 1.0
+            FlatButton:
+                text: "x"
+                size_hint_x: .1
     BoxLayout:
         orientation: 'vertical'
         padding: 300,300
         spacing: 30
-        size: self.size
-
+        size_hint_y: None
+        height: 400
         BoxLayout:
             orientation: "vertical"
-            spacing: 10
+            spacing: 35
             size_hint_y: 20
             size_hint_x: 1.0
-
+            height: 30
             TextInput:
                 id: username_field
                 hint_text: "Username"
                 multiline: False
-                
+                pos : (1000,200)
                 focus: True
                 size:self.size
                 on_text_validate: pwd_field.focus= True
@@ -55,7 +72,7 @@
         SigninButton:
             text: "Sign In"
             size_hint_y: None
-            height: 60
+            height: 40
             background_color: (.06,.06,.06,1)
             background_normal: ''
             pos : (500,200)
@@ -121,9 +138,5 @@
     background_color:0,1,0,1
     color:0,1,0,1
     text:"Press for Single Digit"
-
-
-
-
 
 
