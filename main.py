@@ -7,7 +7,7 @@ from kivy.uix.button import Button
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.button import Label
 from kivy.app import App
-import datetime
+import datetime,time
 from datetime import date
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.textinput import TextInput
@@ -16,8 +16,8 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 import json,requests
 
 
-'''from kivy.uix.popup import Popup
-from kivy.garden.MessageBox import MessageBox'''
+from kivy.uix.popup import Popup
+
 DOMAIN = 'http://3.16.36.128/'
 API_TOKEN = 'api/token/'
 GAME_DATA = 'game/gamedata/'
@@ -109,6 +109,9 @@ class SigninWindow(BoxLayout):
 
                 access_json = response.json()
                 access_s = access_json["access"]
+            else:
+                self.text ='Login Failed !!!'
+
 
 
 class BhootnathApp(App):
@@ -149,6 +152,7 @@ class BhootnathApp(App):
             if flag :
                 if inputNumber == 0:
                     self.lotteryResult.text = str(inputNumber)
+                    digit_num1 = 0
                 else:
                     while inputNumber > 0:
 
@@ -156,6 +160,7 @@ class BhootnathApp(App):
                         rev = rev + dig
                         inputNumber = inputNumber // 10
                         singleNumber = rev % 10
+                        print(singleNumber,inputNumber)
                         digit_num1 = singleNumber
                         self.lotteryResult.text = str(singleNumber)
 
@@ -186,11 +191,20 @@ class BhootnathApp(App):
             closetime =16
             slotover =4
 
+            '''1st GAME ? 09:40 AM
+                2nd GAME ? 11:55 AM
+                3rd GAME ? 01:20 PM
+                4th GAME ? 02:55 PM
+                5th GAME ? 04:20 PM
+                6th GAME ? 05:55 PM
+                7  th GAME ? 07:20 PM
+                8th GAME ? 08:55 PM'''
+
         else:
              slotdict = {0: 'slot1', 1: 'slot2', 2: 'slot3', 3: 'slot4', 4: 'slot5', 5: 'slot6', 6: 'slot7', 7: 'slot8',
                     8: 'Slot-over'}
 
-             slotlist = [9,11, 13, 15, 16, 18, 19, 20, 23]
+             slotlist = [11, 12, 13, 15, 16.5, 18.5, 17.5,22,23]
              opentime = 7
              closetime = 23
              slotover = 8
@@ -200,7 +214,7 @@ class BhootnathApp(App):
         lowerbound = 7
         upperbound = 11
         i =0
-        #currenttime = 1 Edit this for testing in different hours of time
+        #currenttime = 16# Edit this for testing in different hours of time
 
         while i < len(slotlist):
 
@@ -210,8 +224,9 @@ class BhootnathApp(App):
                 slot_num = i
 
                 break
-            elif closetime < currenttime or currenttime < opentime:
+            elif  currenttime >closetime  or currenttime < opentime:
                 self.mainbutton.text = slotdict[slotover]
+                slot_num = 8
                 break
 
             #if i < len(slotlist): #To avoid out of range
@@ -256,31 +271,41 @@ class BhootnathApp(App):
 
     class Submit(Button):
         def last_submit(self, *args):
-            global access_s, SM
+            global access_s, SM,digit_num3, digit_num1, slot_num
+            print(slot_num)
+            if  slot_num > 7:
+                self.text='Time Over !!! to Show Result '
 
-            header_access = "Bearer " + access_s
+                #exit()
 
-            headers = {
-                'Content-Type': 'application/json',
-                'Authorization': header_access
-            }
-            global digit_num3, digit_num1, slot_num
-            submitdict = {
-                "digit3": digit_num3,
-                "digit1": digit_num1,
-                "slot": slot_num+1,
-                "rider_id": 2
-            }
-            data_str = json.dumps(submitdict)
-
-            response = requests.post(DOMAIN + GAME_DATA, headers=headers,data=data_str)
-
-            if response.status_code == 201:
-                SM.current = 's1'
-                print(response.json())
             else:
-                print(response.json())
-                pass
+
+                header_access = "Bearer " + access_s
+
+                headers = {
+                    'Content-Type': 'application/json',
+                    'Authorization': header_access
+                }
+
+                submitdict = {
+                    "digit3": digit_num3,
+                    "digit1": digit_num1,
+                    "slot": slot_num+1,
+                    "rider_id": 2
+                }
+                data_str = json.dumps(submitdict)
+
+                response = requests.post(DOMAIN + GAME_DATA, headers=headers,data=data_str)
+
+                if response.status_code == 201:
+                    self.text = 'YaaaY!!! Result Published...Check the Portal'
+                    print(response.json())
+
+
+                    SM.current = 's1'
+                else:
+                    print(response.json())
+                    pass
 
 
 # Press the green button in the gutter to run the script.
