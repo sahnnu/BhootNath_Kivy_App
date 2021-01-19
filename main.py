@@ -204,7 +204,7 @@ class BhootnathApp(App):
              slotdict = {0: 'slot1', 1: 'slot2', 2: 'slot3', 3: 'slot4', 4: 'slot5', 5: 'slot6', 6: 'slot7', 7: 'slot8',
                     8: 'Slot-over'}
 
-             slotlist = [11, 12, 13, 15, 16.5, 18.5, 17.5,22,23]
+             slotlist = [11, 12, 13, 15, 16.5, 18.5, 19.5,22,23]
              opentime = 7
              closetime = 23
              slotover = 8
@@ -214,7 +214,7 @@ class BhootnathApp(App):
         lowerbound = 7
         upperbound = 11
         i =0
-        #currenttime = 16# Edit this for testing in different hours of time
+       # currenttime = 21# Edit this for testing in different hours of time
 
         while i < len(slotlist):
 
